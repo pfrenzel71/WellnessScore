@@ -10,6 +10,7 @@ namespace WellnessScore.BusinessLogic
     {
         List<double> scores;
         private string Name { get; set; }
+        public const string DRsNAME = "Dr. John Smith";
 
         public Score(string name)
         {

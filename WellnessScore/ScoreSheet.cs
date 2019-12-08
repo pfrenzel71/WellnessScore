@@ -11,11 +11,12 @@ using WellnessScore.BusinessLogic;
 
 namespace WellnessScore
 {
-    public partial class Form1 : Form
+    public partial class ScoreSheet : Form
     {
         private Score _scores;
+        public static Patient p;
 
-        public Form1()
+        public ScoreSheet()
         {
             InitializeComponent();
         }
@@ -23,6 +24,31 @@ namespace WellnessScore
         private void Form1_Load(object sender, EventArgs e)
         {
             _scores = new Score("");
+
+            if (!string.IsNullOrEmpty(p.Name))
+            {
+                try
+                {
+                    lblPatientNameNumber.Text = lblPatientNameNumber.Text.Replace("[Patient Name]", p.Name)
+                        .Replace("[Patient Number]", p.Number.ToString());
+
+                    // TODO: Need to calc the patient's age from todays date
+                    //lblPatientAge.Text = lblPatientAge.   
+
+                    lblPatientGender.Text = lblPatientGender.Text.Replace("[Gender]", p.Gender);
+                    lblExamNumber.Text = lblExamNumber.Text.Replace("[Exam Number]", p.ExamNumber.ToString());
+                    lblExamDate.Text = lblExamDate.Text.Replace("[Exam Date]", p.ExamDate);
+                    lblDrsName.Text = lblDrsName.Text.Replace("[Dr Name]", Score.DRsNAME);
+                    lblLetterHead.Text = lblLetterHead.Text.Replace("[Dr Name]", Score.DRsNAME);
+                }
+                catch (Exception exception)
+                {
+                    //TODO : Catch Exception
+                    Console.WriteLine(exception);
+                    throw;
+                }
+
+            }
         }
 
         private void btnCalculateScore_Click(object sender, EventArgs e)
